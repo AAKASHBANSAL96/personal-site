@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
+import "../style.css";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   AiOutlineHome,
   AiOutlineFundProjectionScreen,
@@ -11,6 +12,9 @@ import {
 } from "react-icons/ai";
 
 function NavBar() {
+  const location = useLocation();
+  console.log(location.pathname);
+
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);
 
@@ -50,13 +54,22 @@ function NavBar() {
               </Nav.Link>
             </Nav.Item>
 
-            <Nav.Item>
+            <Nav.Item activeKey={location.pathname}>
               <Nav.Link
                 as={Link}
                 to="/about"
                 onClick={() => updateExpanded(false)}
+                style={{
+                  color: location.pathname === "/about" ? "#be50f4" : "#fff",
+                }}
               >
-                <AiOutlineUser style={{ marginBottom: "2px" }} /> About
+                <AiOutlineUser
+                  style={{
+                    marginBottom: "2px",
+                    color: location.pathname === "/about" ? "#be50f4" : "#fff",
+                  }}
+                />{" "}
+                About
               </Nav.Link>
             </Nav.Item>
 
